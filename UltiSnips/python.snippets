@@ -23,6 +23,14 @@ if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_q
 	fire.Fire(main)
 endsnippet
 
+snippet request-session "request-session" b
+session = requests.Session()
+
+adapters = requests.adapters.HTTPAdapter(max_retries=3)
+session.mount("http://", adapters)
+session.mount("https://", adapters)
+endsnippet
+
 snippet ifmain "ifmain" b
 import os
 
