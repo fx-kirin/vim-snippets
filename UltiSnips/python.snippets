@@ -31,9 +31,26 @@ session.mount("http://", adapters)
 session.mount("https://", adapters)
 endsnippet
 
-snippet pannum "Pandas Numpy Import" b
-import pandas as pd
+snippet request-session "logzero_setup" b
+logzero.__name__ = ''
+logzero.setup_logger('')
+endsnippet
+
+snippet numpandas "Pandas Numpy Import" b
 import numpy as np
+import pandas as pd
+endsnippet
+
+snippet mysqlalchemy "Create SQLAlchemy engine to connect Mysql" b
+from sqlalchemy import create_engine
+db_settings = {
+    "host": '',
+    "database": '',
+    "user": '',
+    "password": '',
+    "port":3306
+}
+engine = create_engine('mysql://{user}:{password}@{host}:{port}/{database}?charset=utf8'.format(**db_settings))
 endsnippet
 
 snippet ifmain "ifmain" b
