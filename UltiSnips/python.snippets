@@ -14,6 +14,7 @@ endsnippet
 snippet fire "fire" b
 import os
 import fire
+from logging import *
 
 def main():
 	${1:${VISUAL:pass}}
@@ -32,8 +33,14 @@ session.mount("https://", adapters)
 endsnippet
 
 snippet logzero_setup "logzero default setting" b
+import logzero
+import logging
+import stdlogging
+from logging import *
+
 logzero.__name__ = ''
-logzero.setup_logger('')
+logzero.setup_logger('', logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO, maxBytes=10*1e6)
+stdlogging.enable()
 endsnippet
 
 snippet numpandas "Pandas Numpy Import" b
