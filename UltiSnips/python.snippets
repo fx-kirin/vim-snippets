@@ -14,14 +14,25 @@ endsnippet
 snippet fire "fire" b
 import os
 import fire
-from logging import *
+import logging
+import ktools
+import stdlogging
 
 def main():
 	${1:${VISUAL:pass}}
 	
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+	ktools.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
+	stdlogging.enable()
 	os.chdir(os.path.dirname(os.path.abspath(__file__)))
 	fire.Fire(main)
+endsnippet
+
+snippet fire "fire" b
+snippet defm
+	def ${1:__init__}(self, ${2:*args, **kwargs}):
+		${5:super(SuperClass, self).$1($2)}
+		${0:pass}
 endsnippet
 
 snippet request-session "request-session" b
@@ -32,15 +43,26 @@ session.mount("http://", adapters)
 session.mount("https://", adapters)
 endsnippet
 
+snippet parent_system_path "add parent directory to system_path" b
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+endsnippet
+
+snippet traceback_logging "traceback_logging" b
+import sys, traceback
+logging.error(sys.exc_info())
+logging.error(traceback.format_exc())
+endsnippet
+
 snippet logzero_setup "logzero default setting" b
-import logzero
+import ktools
 import logging
 import stdlogging
-from logging import *
 
-logzero.__name__ = ''
-logzero.setup_logger('', logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO, maxBytes=10*1e6)
+ktools.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
 stdlogging.enable()
+stderr = ktools.get_stderr_logger()
 endsnippet
 
 snippet numpandas "Pandas Numpy Import" b
@@ -62,11 +84,16 @@ endsnippet
 
 snippet ifmain "ifmain" b
 import os
+import logging
+import ktools
+import stdlogging
 
 def main():
 	${1:${VISUAL:pass}}
 
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+	ktools.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
+	stdlogging.enable()
 	os.chdir(os.path.dirname(os.path.abspath(__file__)))
 	main()
 endsnippet
