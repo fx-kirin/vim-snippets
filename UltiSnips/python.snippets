@@ -28,11 +28,27 @@ if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_q
 	fire.Fire(main)
 endsnippet
 
-snippet fire "fire" b
+snippet defm "define instance method" b
 snippet defm
 	def ${1:__init__}(self, ${2:*args, **kwargs}):
 		${5:super(SuperClass, self).$1($2)}
 		${0:pass}
+endsnippet
+
+snippet kanimysql "kanimysql instance create" b
+import kanimysql
+import yaml
+
+yaml_data = '''
+	db: 
+	user: 
+	passwd: 
+	host: 127.0.0.1
+	port: 3306
+	charset: utf8
+'''
+db_settings = yaml.load(yaml_data)
+conn = kanimysql.KaniMySQL(*db_settings)
 endsnippet
 
 snippet request-session "request-session" b
