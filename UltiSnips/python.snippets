@@ -29,10 +29,9 @@ if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_q
 endsnippet
 
 snippet defm "define instance method" b
-snippet defm
-	def ${1:__init__}(self, ${2:*args, **kwargs}):
-		${5:super(SuperClass, self).$1($2)}
-		${0:pass}
+def ${1:__init__}(self, ${2:*args, **kwargs}):
+	${5:super(SuperClass, self).$1($2)}
+	${0:pass}
 endsnippet
 
 snippet kanimysql "kanimysql instance create" b
