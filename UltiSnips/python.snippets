@@ -15,7 +15,7 @@ snippet fire "fire" b
 import os
 import fire
 import logging
-import ktools
+import kanilog
 import stdlogging
 
 
@@ -24,16 +24,23 @@ def main():
 
 	
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
-	ktools.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
+	kanilog.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
 	stdlogging.enable()
 	os.chdir(os.path.dirname(os.path.abspath(__file__)))
 	fire.Fire(main)
 endsnippet
 
 snippet defm "define instance method" b
-def ${1:__init__}(self, ${2:*args, **kwargs}):
+def ${1:method}(self, ${2:*args, **kwargs}):
 	${5:super(SuperClass, self).$1($2)}
 	${0:pass}
+endsnippet
+
+snippet defi "define initialize instance method" b
+def ${1:__init__}(self, ${2:*args, **kwargs}):
+	${5:super(SuperClass, self).$1($2)}
+	logging.setLogger(self.__class__.name
+	${0:)}
 endsnippet
 
 snippet kanimysql "kanimysql instance create" b
@@ -73,13 +80,13 @@ logging.error(traceback.format_exc())
 endsnippet
 
 snippet logzero_setup "logzero default setting" b
-import ktools
+import kanilog
 import logging
 import stdlogging
 
-ktools.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
+kanilog.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
 stdlogging.enable()
-stderr = ktools.get_stderr_logger()
+stderr = kanilog.get_stderr_logger()
 endsnippet
 
 snippet numpandas "Pandas Numpy Import" b
@@ -102,7 +109,7 @@ endsnippet
 snippet ifmain "ifmain" b
 import os
 import logging
-import ktools
+import kanilog
 import stdlogging
 
 
@@ -111,7 +118,7 @@ def main():
 
 
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
-	ktools.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
+	kanilog.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
 	stdlogging.enable()
 	os.chdir(os.path.dirname(os.path.abspath(__file__)))
 	main()
