@@ -79,7 +79,7 @@ logging.error(traceback.format_exc())
 endsnippet
 
 snippet log_anywhere "log from anywhere" b
-	__import__('kanilog').log_anywhere()
+__import__('kanilog').log_anywhere('${0:}')
 endsnippet
 
 snippet logzero_setup "logzero default setting" b
