@@ -39,8 +39,7 @@ endsnippet
 snippet defi "define initialize instance method" b
 def ${1:__init__}(self, ${2:*args, **kwargs}):
 	${5:super(SuperClass, self).$1($2)}
-	logging.setLogger(self.__class__.name
-	${0:)}
+	self.log = logging.setLogger(${0:self.__class__.name})
 endsnippet
 
 snippet kanimysql "kanimysql instance create" b
@@ -77,6 +76,10 @@ snippet traceback_logging "traceback_logging" b
 import sys, traceback
 logging.error(sys.exc_info())
 logging.error(traceback.format_exc())
+endsnippet
+
+snippet log_anywhere "log from anywhere" b
+	__import__('kanilog').log_anywhere()
 endsnippet
 
 snippet logzero_setup "logzero default setting" b
