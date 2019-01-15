@@ -39,7 +39,7 @@ endsnippet
 snippet defi "define initialize instance method" b
 def ${1:__init__}(self, ${2:*args, **kwargs}):
 	${5:super(SuperClass, self).$1($2)}
-	self.log = logging.setLogger(${0:self.__class__.name})
+	self.log = logging.getLogger(${0:self.__class__.__name__})
 endsnippet
 
 snippet kanimysql "kanimysql instance create" b
