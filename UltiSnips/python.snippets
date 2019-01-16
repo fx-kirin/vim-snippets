@@ -24,9 +24,9 @@ def main():
 
 	
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
-	kanilog.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
-	stdlogging.enable()
 	os.chdir(os.path.dirname(os.path.abspath(__file__)))
+	kanilog.setup_logger(logfile='/tmp/%s.log' % (os.path.basename(__file__)), level=logging.INFO)
+	stdlogging.enable()
 	fire.Fire(main)
 endsnippet
 
@@ -40,6 +40,19 @@ snippet defi "define initialize instance method" b
 def ${1:__init__}(self, ${2:*args, **kwargs}):
 	${5:super(SuperClass, self).$1($2)}
 	self.log = logging.getLogger(${0:self.__class__.__name__})
+endsnippet
+
+snippet classlogger "class initialized getLogger" b
+	self.log = logging.getLogger(${0:self.__class__.__name__})
+endsnippet
+
+snippet pathlibfrom "import pathlib.Path" b
+from pathlib import Path
+endsnippet
+
+snippet filelogger "getLogger(__file__)" b
+from pathlib import Path
+logger = logging.getLogger(Path(__file__).name)
 endsnippet
 
 snippet kanimysql "kanimysql instance create" b
@@ -121,9 +134,9 @@ def main():
 
 
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
-	kanilog.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
-	stdlogging.enable()
 	os.chdir(os.path.dirname(os.path.abspath(__file__)))
+	kanilog.setup_logger(logfile='/tmp/%s.log' % (os.path.basename(__file__)), level=logging.INFO)
+	stdlogging.enable()
 	main()
 endsnippet
 
@@ -374,6 +387,7 @@ class ${1:MyClass}(${2:object}):
 	`!p snip.rv = triple_quotes(snip)`${3:Docstring for $1. }`!p snip.rv = triple_quotes(snip)`
 
 	def __init__(self$4):
+		self.log = logging.getLogger(${0:self.__class__.__name__})
 		`!p snip.rv = triple_quotes(snip)`${5:TODO: to be defined1.}`!p
 snip.rv = ""
 snip >> 2
