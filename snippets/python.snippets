@@ -162,7 +162,7 @@ snippet ipdb
 	__import__('ipdb').set_trace()
 # embed ipython itself
 snippet iem
-	__import__('IPython').embed()
+	__import__('IPython').embed(user_ns=vars(), using=False)
 # remote python debugger (rpdb)
 snippet rpdb
 	__import__('rpdb').set_trace()
