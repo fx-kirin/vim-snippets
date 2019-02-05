@@ -17,6 +17,7 @@ import fire
 import logging
 import kanilog
 import stdlogging
+from pathlib import Path
 
 
 def main():
@@ -24,10 +25,14 @@ def main():
 
 	
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
-	os.chdir(os.path.dirname(os.path.abspath(__file__)))
-	kanilog.setup_logger(logfile='/tmp/%s.log' % (os.path.basename(__file__)), level=logging.INFO)
+	os.chdir(Path(__file__).parent)
+	kanilog.setup_logger(logfile='/tmp/%s.log' % (Path(__file__).name), level=logging.INFO)
 	stdlogging.enable()
 	fire.Fire(main)
+endsnippet
+
+snippet chdirfile "change directory to the file directory" b
+os.chdir(Path(__file__).parent)
 endsnippet
 
 snippet defm "define instance method" b
@@ -72,17 +77,18 @@ conn = kanimysql.KaniMySQL(*db_settings)
 endsnippet
 
 snippet request-session "request-session" b
-session = requests.Session()
+import requests_html
 
+session = requests_html.HTMLSession()
 adapters = requests.adapters.HTTPAdapter(max_retries=3)
 session.mount("http://", adapters)
 session.mount("https://", adapters)
 endsnippet
 
 snippet parent_system_path "add parent directory to system_path" b
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from add_parent_path import add_parent_path
+with add_parent_path():
+	pass
 endsnippet
 
 snippet traceback_logging "traceback_logging" b
@@ -99,8 +105,9 @@ snippet logzero_setup "logzero default setting" b
 import kanilog
 import logging
 import stdlogging
+from pathlib import Path
 
-kanilog.setup_logger(logfile='/tmp/%s.log'%(os.path.basename(__file__)), level=logging.INFO)
+kanilog.setup_logger(logfile='/tmp/%s.log'%(Path(__file__).name), level=logging.INFO)
 stdlogging.enable()
 stderr = kanilog.get_stderr_logger()
 endsnippet
@@ -134,8 +141,8 @@ def main():
 
 
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
-	os.chdir(os.path.dirname(os.path.abspath(__file__)))
-	kanilog.setup_logger(logfile='/tmp/%s.log' % (os.path.basename(__file__)), level=logging.INFO)
+	os.chdir(Path(__file__).parent)
+	kanilog.setup_logger(logfile='/tmp/%s.log' % (Path(__file__).name), level=logging.INFO)
 	stdlogging.enable()
 	main()
 endsnippet
