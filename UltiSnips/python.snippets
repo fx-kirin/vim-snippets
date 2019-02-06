@@ -17,7 +17,7 @@ import fire
 import logging
 import kanilog
 import stdlogging
-from pathlib import Path
+from pathlib2 import Path
 
 
 def main():
@@ -34,6 +34,14 @@ endsnippet
 snippet chdirfile "change directory to the file directory" b
 os.chdir(Path(__file__).parent)
 endsnippet
+
+snippet keyringplain "use plain text keyring" b
+import keyring
+import keyrings.alt
+keyring.set_keyring(keyrings.alt.file.PlaintextKeyring())
+keyring.allow_insecure_backend = True
+endsnippet
+
 
 snippet defm "define instance method" b
 def ${1:method}(self, ${2:*args, **kwargs}):
@@ -52,11 +60,11 @@ snippet classlogger "class initialized getLogger" b
 endsnippet
 
 snippet pathlibfrom "import pathlib.Path" b
-from pathlib import Path
+from pathlib2 import Path
 endsnippet
 
 snippet filelogger "getLogger(__file__)" b
-from pathlib import Path
+from pathlib2 import Path
 logger = logging.getLogger(Path(__file__).name)
 endsnippet
 
@@ -105,7 +113,7 @@ snippet logzero_setup "logzero default setting" b
 import kanilog
 import logging
 import stdlogging
-from pathlib import Path
+from pathlib2 import Path
 
 kanilog.setup_logger(logfile='/tmp/%s.log'%(Path(__file__).name), level=logging.INFO)
 stdlogging.enable()
@@ -134,6 +142,7 @@ import os
 import logging
 import kanilog
 import stdlogging
+from pathlib2 import Path
 
 
 def main():
