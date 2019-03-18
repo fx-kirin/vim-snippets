@@ -17,7 +17,7 @@ import fire
 import logging
 import kanilog
 import stdlogging
-from pathlib2 import Path
+from pathlib import Path
 
 
 def main():
@@ -42,6 +42,21 @@ keyring.set_keyring(keyrings.alt.file.PlaintextKeyring())
 keyring.allow_insecure_backend = True
 endsnippet
 
+snippet singleton "make single instance" b
+from tendo import singleton
+me = singleton.SingleInstance()
+endsnippet
+
+
+snippet benchmarker "benchmark" b
+from benchmarker import Benchmarker
+
+with Benchmarker(10000, width=40) as bench:
+	@bench("name")
+	def _(bm):
+		for i in bm:
+			pass
+endsnippet
 
 snippet defm "define instance method" b
 def ${1:method}(self, ${2:*args, **kwargs}):
@@ -60,11 +75,11 @@ snippet classlogger "class initialized getLogger" b
 endsnippet
 
 snippet pathlibfrom "import pathlib.Path" b
-from pathlib2 import Path
+from pathlib import Path
 endsnippet
 
 snippet filelogger "getLogger(__file__)" b
-from pathlib2 import Path
+from pathlib import Path
 logger = logging.getLogger(Path(__file__).name)
 endsnippet
 
@@ -113,7 +128,7 @@ snippet logzero_setup "logzero default setting" b
 import kanilog
 import logging
 import stdlogging
-from pathlib2 import Path
+from pathlib import Path
 
 kanilog.setup_logger(logfile='/tmp/%s.log'%(Path(__file__).name), level=logging.INFO)
 stdlogging.enable()
@@ -142,7 +157,7 @@ import os
 import logging
 import kanilog
 import stdlogging
-from pathlib2 import Path
+from pathlib import Path
 
 
 def main():
@@ -398,6 +413,8 @@ endglobal
 ########################################
 
 snippet class "class with docstrings" b
+import logging
+
 class ${1:MyClass}(${2:object}):
 
 	`!p snip.rv = triple_quotes(snip)`${3:Docstring for $1. }`!p snip.rv = triple_quotes(snip)`
