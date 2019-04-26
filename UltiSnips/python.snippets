@@ -31,6 +31,21 @@ if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_q
 	fire.Fire(main)
 endsnippet
 
+snippet kanirequests "change directory to the file directory" b
+from kanirequests import KaniRequests
+
+headers = {
+	"User-Agent": "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0",
+	'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
+	'Connection': 'keep-alive',
+	'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+	'Accept-Encoding': 'gzip, deflate, br',
+	'Cache-Control': 'max-age=0'
+}
+
+session = KaniRequests(headers=headers)
+endsnippet
+
 snippet chdirfile "change directory to the file directory" b
 os.chdir(Path(__file__).parent)
 endsnippet
@@ -99,10 +114,28 @@ db_settings = yaml.load(yaml_data)
 conn = kanimysql.KaniMySQL(*db_settings)
 endsnippet
 
+snippet freezegun "freezegun snippets" b
+from freezegun import freeze_time
+
+with freeze_time("2012-01-14"):
+	pass
+endsnippet
+
 snippet request-session "request-session" b
+import requests
 import requests_html
 
-session = requests_html.HTMLSession()
+headers = {
+	"User-Agent": "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0",
+	'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
+	'Connection': 'keep-alive',
+	'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+	'Accept-Encoding': 'gzip, deflate, br',
+	'Cache-Control': 'max-age=0'
+}
+
+session = requests_html.HTMLSession(header)
+session.headers.update(headers)
 adapters = requests.adapters.HTTPAdapter(max_retries=3)
 session.mount("http://", adapters)
 session.mount("https://", adapters)
